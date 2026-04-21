@@ -1,16 +1,39 @@
-# flash_cards
+## ✅ Requisitos do Aplicativo
 
-A new Flutter project.
+- [ ] Exibir uma página informando que o usuário não possui nenhum baralho criado  
+  - [ ] Disponibilizar ações para cadastro de novo baralho  
 
-## Getting Started
+- [ ] Listar baralhos cadastrados  
+  - [ ] Exibir nome do baralho  
+  - [ ] Exibir quantidade de cartões  
 
-This project is a starting point for a Flutter application.
+- [ ] Criar novo baralho  
+  - [ ] Baralho deve conter apenas um nome  
 
-A few resources to get you started if this is your first Flutter project:
+- [ ] Remover baralho  
+  - [ ] Ação deve ocorrer ao manter o dedo pressionado (long press)  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [ ] Navegar para página de detalhe do baralho ao clicar  
+  - [ ] Exibir nome do baralho  
+  - [ ] Exibir quantidade de cartões  
+  - [ ] Botão para adicionar novo cartão  
+  - [ ] Botão para iniciar o quiz  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [ ] Cadastrar novo cartão  
+  - [ ] Cartão deve conter pergunta  
+  - [ ] Cartão deve conter resposta  
+
+- [ ] Atualizar quantidade de cartões automaticamente  
+  - [ ] Atualizar na página de detalhe do baralho  
+  - [ ] Atualizar na listagem de baralhos  
+
+- [ ] Implementar fluxo de quiz  
+  - [ ] Iniciar exibindo a pergunta  
+  - [ ] Permitir alternar entre pergunta e resposta  
+  - [ ] Botão para indicar acerto  
+  - [ ] Botão para indicar erro  
+  - [ ] Exibir progresso do quiz (ex: `2/10`)  
+
+- [ ] Finalizar quiz  
+  - [ ] Exibir mensagem de conclusão  
+  - [ ] Exibir pontuação final do usuário  
