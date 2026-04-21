@@ -12,4 +12,10 @@ class DeckRepository {
     return List<Deck>.from(decks!);
   }
 
+  Future<void> addDeck(Deck deck) async {
+    final decks = boxDecks.get('decks', defaultValue: [])!;
+    decks.add(deck);
+    await boxDecks.put('decks', decks);
+    await Future.delayed(const Duration(seconds: 2));
+  }
 }
