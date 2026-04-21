@@ -13,10 +13,10 @@ class _NewDeckState extends State<NewDeck> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Novo Deck'),
+        title: Text('Novo Deck', style: TextStyle(fontSize: 14)),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
       ),
