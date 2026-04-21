@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Pagina de listagem de decks',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => const DeckPage(),
+        '/': (context) => DeckPage(),
         '/new-deck': (context) => const NewDeck(),
       },
       initialRoute: '/',
