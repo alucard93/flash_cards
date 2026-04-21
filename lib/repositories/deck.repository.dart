@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class DeckRepository {
   final Box<List> boxDecks;
 
+  // Construtor para injetar a dependência do Hive Box
   DeckRepository(this.boxDecks);
 
   Future<List<Deck>> getAllDecks() async {
