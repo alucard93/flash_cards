@@ -5,7 +5,7 @@ class DeckRepository {
   final Box<List> boxDecks;
 
   // Construtor para injetar a dependência do Hive Box
-  DeckRepository(this.boxDecks);
+  DeckRepository({required this.boxDecks});
 
   Future<List<Deck>> getAllDecks() async {
     final decks = boxDecks.get('decks', defaultValue: []);
