@@ -1,6 +1,6 @@
 ## ✅ Requisitos do Aplicativo
 
-- [ ] Exibir uma página informando que o usuário não possui nenhum baralho criado  
+- [x] Exibir uma página informando que o usuário não possui nenhum baralho criado  
   - [ ] Disponibilizar ações para cadastro de novo baralho  
 
 - [ ] Listar baralhos cadastrados  
