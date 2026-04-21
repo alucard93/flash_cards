@@ -1,6 +1,7 @@
 import 'package:flash_cards/stores/decks.store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class NewDeck extends StatefulWidget {
   const NewDeck({super.key});
@@ -12,7 +13,7 @@ class NewDeck extends StatefulWidget {
 class _NewDeckState extends State<NewDeck> {
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
-  final store = DeckStore();
+  final store = GetIt.I.get<DeckStore>();
 
   Future<void> addDeck() async {
     if (!formKey.currentState!.validate()) return;
