@@ -17,10 +17,12 @@ abstract class _DeckStoreBase with Store {
   Future<void> getDecks() async {
     isLoading = true;
 
-    final repository = GetIt.I.get<DeckRepository>();
-
-    decks = (await repository.getAllDecks()).asObservable();
-    isLoading = false;
+    try {
+      final repository = GetIt.I.get<DeckRepository>();
+      decks = (await repository.getAllDecks()).asObservable();
+    } finally {
+      isLoading = false;
+    }
   }
 
   @action
@@ -29,14 +31,15 @@ abstract class _DeckStoreBase with Store {
 
     try {
       final repository = GetIt.I.get<DeckRepository>();
-
-      await repository.addDeck(
-        Deck(id: DateTime.now().millisecond.toString(), name: name),
+      final deck = Deck(
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
+        name: name,
       );
+
+      await repository.addDeck(deck);
+      decks.add(deck);
     } finally {
       isLoading = false;
     }
-
-    isLoading = false;
   }
 }
