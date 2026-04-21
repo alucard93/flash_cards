@@ -31,7 +31,9 @@ class DeckPage extends StatelessWidget {
 
               OutlinedButton(
                 key: Key("btnOutlineAdicionar"),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/new-deck');
+                },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Color(0xFFE1E1E1), width: 1),
                   minimumSize: const Size(double.infinity, 60),
