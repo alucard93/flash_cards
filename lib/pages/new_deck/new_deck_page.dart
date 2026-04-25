@@ -74,6 +74,7 @@ class _NewDeckState extends State<NewDeck> {
                     ),
                     const SizedBox(height: 32),
                     TextFormField(
+                      key: Key("tituloDeck"),
                       controller: nameController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -93,6 +94,7 @@ class _NewDeckState extends State<NewDeck> {
                     const SizedBox(height: 32),
                     Align(
                       child: OutlinedButton(
+                        key: Key("btnAdicionarDeck"),
                         style: OutlinedButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(

@@ -42,4 +42,20 @@ abstract class _DeckStoreBase with Store {
       isLoading = false;
     }
   }
+
+  @action
+  Future<bool> removeDeck(String id) async {
+    isLoading = true;
+
+    try {
+      final repository = GetIt.I.get<DeckRepository>();
+      await repository.removeDeck(id);
+      decks.removeWhere((deck) => deck.id == id);
+      return true;
+    } catch (_) {
+      return false;
+    } finally {
+      isLoading = false;
+    }
+  }
 }

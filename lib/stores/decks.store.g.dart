@@ -56,6 +56,14 @@ mixin _$DeckStore on _DeckStoreBase, Store {
     return _$addDeckAsyncAction.run(() => super.addDeck(name));
   }
 
+  late final _$removeDeckAsyncAction =
+      AsyncAction('_DeckStoreBase.removeDeck', context: context);
+
+  @override
+  Future<bool> removeDeck(String id) {
+    return _$removeDeckAsyncAction.run(() => super.removeDeck(id));
+  }
+
   @override
   String toString() {
     return '''

@@ -26,21 +26,71 @@ class DeckPage extends StatelessWidget {
             return const DeckEmptyWidget();
           }
 
-          return ListView.builder(
-            itemCount: store.decks.length,
-            itemBuilder: (context, index) {
-              final deck = store.decks[index];
-              return ListTile(title: Text(deck.name));
-            },
-          );
+          return store.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemCount: store.decks.length,
+                  itemBuilder: (context, index) {
+                    final deck = store.decks[index];
+                    return Dismissible(
+                      key: ValueKey(deck.id.toString()),
+                      direction: DismissDirection.endToStart,
+                      confirmDismiss: (direction) async {
+                        return store.removeDeck(deck.id);
+                      },
+                      background: Center(
+                        child: Container(
+                          height: 140,
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: const Icon(Icons.delete, color: Colors.white),
+                        ),
+                      ),
+                      child: Container(
+                        height: 140,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(color: Colors.black26),
+                          ),
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                deck.name,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              const Text(
+                                '0 cartões',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
         },
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 16.0),
         child: FloatingActionButton.extended(
-          label: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: const Text(
+          label: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
               'Adicionar',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
@@ -52,6 +102,7 @@ class DeckPage extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, '/new-deck');
           },
+          key: const Key("btnAdicionar"),
         ),
       ),
     );
