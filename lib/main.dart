@@ -1,5 +1,6 @@
 import 'package:flash_cards/model/decks/deck.model.dart';
 import 'package:flash_cards/pages/deck/deck_page.dart';
+import 'package:flash_cards/pages/new_card/new_card_page.dart';
 import 'package:flash_cards/pages/new_deck/new_deck_page.dart';
 import 'package:flash_cards/repositories/deck.repository.dart';
 import 'package:flash_cards/stores/decks.store.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => DeckPage(),
         '/new-deck': (context) => const NewDeck(),
+        '/new-card': (context) => const NewCardPage(),
       },
       initialRoute: '/',
     );

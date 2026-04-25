@@ -59,7 +59,9 @@ class DeckDetailPage extends StatelessWidget {
                               height: 60,
                               child: OutlinedButton(
                                 key: Key("addCard"),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/new-card');
+                                },
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(
                                     color: Colors.black,
