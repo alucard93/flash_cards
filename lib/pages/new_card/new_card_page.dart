@@ -41,95 +41,92 @@ class _NewCardPageState extends State<NewCardPage> {
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Nova Cartão'),
+        title: const Text('Novo cartão', style: TextStyle(fontSize: 14)),
         centerTitle: true,
       ),
-
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(
-              24,
-              24,
-              24,
-              MediaQuery.of(context).viewInsets.bottom + 24,
-            ),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight - 48,
-              ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 32),
-                    TextFormField(
-                      key: Key("inputPergunta"),
-                      controller: questionController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text('Pergunta'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFE1E1E1)),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value?.isEmpty ?? true) {
-                          return 'Obrigatório';
-                        }
-                        return null;
-                      },
-                    ),
-
-                    const SizedBox(height: 32),
-                    TextFormField(
-                      key: Key("inputResposta"),
-                      controller: answerController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text('Resposta'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xFFE1E1E1)),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value?.isEmpty ?? true) {
-                          return 'Obrigatório';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 32),
-                    Align(
-                      child: OutlinedButton(
-                        key: Key("addCardQuestion"),
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        onPressed: addCard,
-                        child: Observer(
-                          builder: (context) {
-                            return const Text(
-                              'Adicionar',
-                              style: TextStyle(color: Colors.white),
-                            );
-                          },
-                        ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            24,
+            24,
+            24,
+            MediaQuery.of(context).viewInsets.bottom + 24,
+          ),
+          child: SizedBox(
+            width: 360,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    key: const Key('inputPergunta'),
+                    controller: questionController,
+                    minLines: 1,
+                    maxLines: 2,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Pergunta'),
+                      labelStyle: TextStyle(color: Colors.black),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFE1E1E1)),
                       ),
                     ),
-                  ],
-                ),
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 32),
+                  TextFormField(
+                    key: const Key('inputResposta'),
+                    controller: answerController,
+                    minLines: 2,
+                    maxLines: 3,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text('Resposta'),
+                      labelStyle: TextStyle(color: Colors.black),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFFE1E1E1)),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Obrigatório';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 32),
+                  Align(
+                    child: OutlinedButton(
+                      key: const Key('addCardQuestion'),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      onPressed: addCard,
+                      child: Observer(
+                        builder: (context) {
+                          return const Text(
+                            'Adicionar',
+                            style: TextStyle(color: Colors.white),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
