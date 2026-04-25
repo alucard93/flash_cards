@@ -58,6 +58,7 @@ class DeckDetailPage extends StatelessWidget {
                             child: SizedBox(
                               height: 60,
                               child: OutlinedButton(
+                                key: Key("addCard"),
                                 onPressed: () {},
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(
@@ -86,6 +87,7 @@ class DeckDetailPage extends StatelessWidget {
                             child: SizedBox(
                               height: 60,
                               child: FilledButton(
+                                key: Key("startQuiz"),
                                 onPressed: () {},
                                 style: FilledButton.styleFrom(
                                   backgroundColor: Colors.black,
