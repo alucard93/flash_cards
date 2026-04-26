@@ -1,5 +1,6 @@
 import 'package:flash_cards/pages/deck_detail/deck_detail_page.dart';
-import 'package:flash_cards/stores/decks.store.dart';
+import 'package:flash_cards/stores/deck/decks.store.dart';
+import 'package:flash_cards/stores/flash_cards/flash_cards.store.dart';
 import 'package:flash_cards/widgets/deck_empty.widget.dart';
 import 'package:flash_cards/widgets/deck_item.widget.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,10 @@ import 'package:get_it/get_it.dart';
 
 class DeckPage extends StatelessWidget {
   final store = GetIt.I.get<DeckStore>();
-  DeckPage({super.key});
+  final flashCardStore = GetIt.I.get<FlashCardStore>();
+  DeckPage({super.key}) {
+    flashCardStore.getFlashCardCounts(store.decks.map((deck) => deck.id));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +51,24 @@ class DeckPage extends StatelessWidget {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                 ),
-                child: DeckItemWidget(
-                  deck: deck,
-                  onOpenDeck: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DeckDetailPage(deck: deck),
-                      ),
+                child: Observer(
+                  builder: (_) {
+                    return DeckItemWidget(
+                      deck: deck,
+                      cardCount:
+                          flashCardStore.flashCardCountByDeck[deck.id] ?? 0,
+                      onOpenDeck: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DeckDetailPage(deck: deck),
+                          ),
+                        );
+                      },
+                      onRemoveDeck: () async {
+                        await store.removeDeck(deck.id);
+                      },
                     );
-                  },
-                  onRemoveDeck: () async {
-                    await store.removeDeck(deck.id);
                   },
                 ),
               );

@@ -1,4 +1,4 @@
-import 'package:flash_cards/model/decks/deck.model.dart';
+import 'package:flash_cards/models/decks/deck.model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DeckRepository {

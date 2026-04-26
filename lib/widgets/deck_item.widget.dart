@@ -1,14 +1,17 @@
-import 'package:flash_cards/model/decks/deck.model.dart';
+import 'package:flash_cards/models/decks/deck.model.dart';
 import 'package:flutter/material.dart';
 
 class DeckItemWidget extends StatelessWidget {
   final Deck deck;
+  final int cardCount;
+
   final VoidCallback onRemoveDeck;
   final VoidCallback onOpenDeck;
 
   const DeckItemWidget({
     super.key,
     required this.deck,
+    this.cardCount = 0,
     required this.onOpenDeck,
     required this.onRemoveDeck,
   });
@@ -40,8 +43,8 @@ class DeckItemWidget extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  '0 cartoes',
+                Text(
+                  '$cardCount cartoes',
                   style: TextStyle(fontSize: 14, color: Colors.black54),
                 ),
               ],

@@ -1,10 +1,19 @@
-import 'package:flash_cards/model/decks/deck.model.dart';
+import 'package:flash_cards/models/decks/deck.model.dart';
+import 'package:flash_cards/pages/new_card/new_card_page.dart';
+import 'package:flash_cards/pages/quiz/quiz_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flash_cards/stores/flash_cards/flash_cards.store.dart';
+import 'package:flash_cards/stores/quiz/quiz.store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class DeckDetailPage extends StatelessWidget {
   final Deck deck;
+  final flashCardStore = GetIt.I.get<FlashCardStore>();
 
-  const DeckDetailPage({super.key, required this.deck});
+  DeckDetailPage({super.key, required this.deck}) {
+    GetIt.I.allReady().then((_) => flashCardStore.getFlashCards(deck.id));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +54,14 @@ class DeckDetailPage extends StatelessWidget {
 
                           const SizedBox(height: 8),
 
-                          const Text(
-                            '0 cartoes',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 24),
+                          Observer(
+                            builder: (_) {
+                              return Text(
+                                '${flashCardStore.flashCards.length} cartoes',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(fontSize: 24),
+                              );
+                            },
                           ),
 
                           const SizedBox(height: 96),
@@ -59,7 +72,15 @@ class DeckDetailPage extends StatelessWidget {
                               height: 60,
                               child: OutlinedButton(
                                 key: Key("addCard"),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          NewCardPage(deckId: deck.id),
+                                    ),
+                                  );
+                                },
                                 style: OutlinedButton.styleFrom(
                                   side: const BorderSide(
                                     color: Colors.black,
@@ -88,7 +109,32 @@ class DeckDetailPage extends StatelessWidget {
                               height: 60,
                               child: FilledButton(
                                 key: Key("startQuiz"),
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (flashCardStore.flashCards.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'Adicione ao menos um cartao para iniciar o quiz.',
+                                        ),
+                                      ),
+                                    );
+                                    return;
+                                  }
+
+                                  final quizStore = GetIt.I.get<QuizStore>();
+                                  quizStore.startQuiz(
+                                    deckName: deck.name,
+                                    flashCards:
+                                        flashCardStore.flashCards.toList(),
+                                  );
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => QuizPage(store: quizStore),
+                                    ),
+                                  );
+                                },
                                 style: FilledButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(

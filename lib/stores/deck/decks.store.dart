@@ -1,4 +1,4 @@
-import 'package:flash_cards/model/decks/deck.model.dart';
+import 'package:flash_cards/models/decks/deck.model.dart';
 import 'package:flash_cards/repositories/deck.repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
